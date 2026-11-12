@@ -199,6 +199,79 @@ def toDecimal(s):
         decimal += int(digit) * (2 ** index)
     return decimal
 
+# Remove all vowels from the input string.
+# The function iterates over each character in the string and constructs a new string
+# that includes only the characters that are not vowels (a, e, i, o, u, both lowercase and uppercase).
+# For example, removeVowels("Interview") returns "ntrvw".
+def removeVowels(s):
+    vowels = "aeiouAEIOU"
+    return ''.join(char for char in s if char not in vowels)
+
+# Transpose a 2D matrix (list of lists).
+# The function uses the zip function to group elements from each row into columns,
+# effectively flipping the rows and columns of the matrix. It then converts the tuples
+# returned by zip into lists to create the transposed matrix.
+# For example, transpose([[1, 2, 3], [4, 5, 6]]) returns [[1, 4], [2, 5], [3, 6]].
+def transpose(matrix):
+    return [list(row) for row in zip(*matrix)]
+
+# Check if the input list is sorted in non-decreasing order.
+# The function uses a generator expression to compare each element with the next one in the list.
+# If all comparisons are true (i.e., each element is less than or equal to the next), the list is considered sorted.
+# For example, isSorted([1, 2, 2, 3]) returns True, while isSorted([3, 2, 1]) returns False.
+def isSorted(nums):
+    return all(nums[i] <= nums[i + 1] for i in range(len(nums) - 1))
+
+# Check if the input number is a perfect number.
+# A perfect number is a positive integer that is equal to the sum of its proper divisors (excluding itself).
+# The function calculates the sum of all divisors of n (from 1 to n-1) and checks if this sum equals n.
+# For example, isPerfect(6) returns True because 1 + 2 + 3 = 6.
+def isPerfect(n):
+    if n <= 1:
+        return False
+
+    divisors_sum = sum(i for i in range(1, n) if n % i == 0)
+    return divisors_sum == n
+
+# Count the number of steps to reduce a number to zero.
+# The function repeatedly checks if the number is even or odd. If even, it divides the number by 2; 
+# if odd, it subtracts 1. Each operation counts as one step, and the process continues until the number reaches zero.
+# For example, numberOfSteps(14) returns 6 because the steps are: 14 -> 7 -> 6 -> 3 -> 2 -> 1 -> 0.
+def numberOfSteps(n):
+    steps = 0
+    while n > 0:
+        if n % 2 == 0:
+            n //= 2
+        else:
+            n -= 1
+        steps += 1
+    return steps
+
+# Calculate the maximum wealth among a list of accounts.
+# Each account is represented as a list of integers, where each integer represents the wealth of an 
+# individual. The function sums the wealth of each account and returns the maximum sum found.
+# For example, maximumWealth([[1, 2, 3], [3, 2, 1]]) returns 6 because the first account has a total wealth of 6 and the second has a total wealth of 6 as well.
+def maximumWealth(accounts):
+    sumList = []
+    for account in accounts:
+        sumList.append(sum(account))
+
+    return max(sumList)
+
+# Implement the FizzBuzz problem.
+# The function returns "Fizz" if the input number is divisible by 3, "Buzz" if it is divisible by 5,
+# and "FizzBuzz" if it is divisible by both 3 and 5. If the number is not divisible by either, it returns the number as a string.
+# For example, fizzBuzz(15) returns "FizzBuzz", fizzBuzz(3) returns "Fizz", fizzBuzz(5) returns "Buzz", and fizzBuzz(7) returns "7".
+def fizzBuzz(n):
+    result = []
+
+    for divisor, word in [(3, "Fizz"), (5, "Buzz")]:
+        if n % divisor == 0:
+            result.append(word)
+
+    return "".join(result) or str(n)
+
+
 def main():
     # Test the functions with example inputs (Beginner Level Problems)
     print("reverseString:", reverseString("hello"))
@@ -221,6 +294,13 @@ def main():
     print("findMaxConsecutiveOnes:", findMaxConsecutiveOnes([1, 1, 0, 1, 1, 1]))
     print("toBinary:", toBinary(10))
     print("toDecimal:", toDecimal("1010"))
+    print("removeVowels:", removeVowels("Interview"))
+    print("transpose:", transpose([[1, 2, 3], [4, 5, 6]]))
+    print("isSorted:", isSorted([1, 2, 2, 3]))
+    print("isPerfect:", isPerfect(6))
+    print("numberOfSteps:", numberOfSteps(14))
+    print("maximumWealth:", maximumWealth([[1, 2, 3], [4, 5, 6]]))
+    print("fizzBuzz:", fizzBuzz(15))
 
 if __name__ == "__main__":
 	main()
